@@ -10,7 +10,11 @@ import {
   ShieldCheck,
   Printer,
 } from "lucide-react";
-const API = import.meta.env.VITE_API_URL || "";
+const API = import.meta.env.DEV
+  ? ""
+  : (
+      import.meta.env.VITE_API_URL || "https://booking-apartment.onrender.com"
+    ).replace(/\/$/, "");
 const money = (n) => "₦" + Number(n).toLocaleString("en-NG");
 const FALLBACK_APARTMENT_IMAGE = "/images/staynest-apartment-fallback.jpg";
 const LOCAL_APARTMENT_IMAGES = {
