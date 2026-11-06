@@ -44,6 +44,25 @@ Demo admin:
 - Email: admin@staynest.local
 - Password: StayNest@2026
 
+### Move the backend database to Aiven
+
+The backend uses PostgreSQL. To copy an existing local database, keep
+`DATABASE_URL` pointed at the source and fill in `AIVEN_HOST`, `AIVEN_PORT`,
+`AIVEN_DATABASE`, `AIVEN_USER`, `AIVEN_PASSWORD`, and `AIVEN_SSL_CA` in
+`backend/.env` using the connection details and CA certificate from the Aiven
+Console. Alternatively, set `AIVEN_DATABASE_URL` instead of the five connection
+fields. Run `cd backend && npm run db:migrate:aiven`. The command only restores
+into an Aiven database with no public tables and compares the important table
+row counts before it finishes. After it succeeds, change `DATABASE_URL` to the
+Aiven connection URL and set `PGSSL=true` and `PGSSL_CA` to the Aiven CA path for
+the running backend.
+
+For Render, do not use a workstation-only `PGSSL_CA` path. Create a one-line
+base64 value from the downloaded CA certificate with
+`base64 -w0 backend/ca.pem`, then set it as `PGSSL_CA_BASE64` in the Render
+service environment. Keep `PGSSL=true`; the backend decodes the certificate
+and verifies the Aiven TLS connection.
+
 ### 2. Frontend
 
 ```bash

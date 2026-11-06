@@ -1,4 +1,5 @@
 import pg from "pg";
+import { readFileSync } from "node:fs";
 
 const { Pool } = pg;
 const connectionString = process.env.DATABASE_URL;
@@ -7,9 +8,41 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is required to connect to PostgreSQL.");
 }
 
+const poolConnectionString = (() => {
+  if (process.env.PGSSL !== "true") return connectionString;
+  const url = new URL(connectionString);
+  for (const parameter of ["sslmode", "sslrootcert", "sslcert", "sslkey"]) {
+    url.searchParams.delete(parameter);
+  }
+  return url.toString();
+})();
+const sslCa = process.env.PGSSL_CA_BASE64
+  ? Buffer.from(process.env.PGSSL_CA_BASE64, "base64").toString("utf8")
+  : process.env.PGSSL_CA_CONTENT ||
+    (process.env.PGSSL_CA
+      ? readFileSync(process.env.PGSSL_CA, "utf8")
+      : undefined);
+
+if (
+  process.env.PGSSL === "true" &&
+  (!sslCa ||
+    !sslCa.includes("-----BEGIN CERTIFICATE-----") ||
+    !sslCa.includes("-----END CERTIFICATE-----"))
+) {
+  throw new Error(
+    "PGSSL is enabled but no valid CA certificate was loaded. Set PGSSL_CA_BASE64 in Render to the base64-encoded Aiven CA certificate.",
+  );
+}
+
 const pool = new Pool({
-  connectionString,
-  ssl: process.env.PGSSL === "true" ? { rejectUnauthorized: true } : undefined,
+  connectionString: poolConnectionString,
+  ssl:
+    process.env.PGSSL === "true"
+      ? {
+          rejectUnauthorized: true,
+          ...(sslCa ? { ca: sslCa } : {}),
+        }
+      : undefined,
 });
 
 function placeholders(sql) {
