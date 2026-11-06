@@ -1,0 +1,1305 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>StayNest | Frontend Brand Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #302d2c;
+            --garnet: #9e6268;
+            --berry: #b77778;
+            --coral: #d97967;
+            --brick: #a64b44;
+            --blush: #f1d8d2;
+            --blush-light: #f1aaa0;
+            --paper: #f8f7f5;
+            --white: #fff;
+            --line: #e8e4e1;
+            --muted: #76716f;
+            --soft: #f5ece9;
+            --alert: #a13e2e;
+            --good: #315c68;
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'DM Sans', Arial, sans-serif
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background: #e4e0de;
+            color: var(--ink);
+            font-family: var(--sans);
+            font-size: 10pt;
+            line-height: 1.55;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact
+        }
+
+        .page {
+            position: relative;
+            width: 210mm;
+            height: 297mm;
+            margin: 10mm auto;
+            background: var(--paper);
+            overflow: hidden;
+            padding: 18mm 18mm 17mm;
+            page-break-after: always;
+            break-after: page
+        }
+
+        .page:last-child {
+            page-break-after: auto;
+            break-after: auto
+        }
+
+        .page-no {
+            position: absolute;
+            bottom: 8mm;
+            left: 18mm;
+            right: 18mm;
+            border-top: 1px solid var(--line);
+            padding-top: 3mm;
+            display: flex;
+            justify-content: space-between;
+            color: var(--muted);
+            font-size: 7.5pt;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .kicker {
+            color: var(--brick);
+            font-weight: 700;
+            font-size: 8pt;
+            letter-spacing: .17em;
+            text-transform: uppercase
+        }
+
+        .dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-right: 8px;
+            background: var(--coral);
+            border-radius: 50%;
+            vertical-align: 1px
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0
+        }
+
+        h1,
+        h2,
+        .display {
+            font-family: var(--serif);
+            font-weight: 600;
+            line-height: 1.04;
+            letter-spacing: 0
+        }
+
+        h1 {
+            font-size: 34pt
+        }
+
+        h2 {
+            font-size: 25pt;
+            margin-bottom: 5mm
+        }
+
+        h3 {
+            font-size: 11pt;
+            margin-bottom: 2mm
+        }
+
+        p {
+            margin-bottom: 4mm
+        }
+
+        .lead {
+            font-size: 12pt;
+            color: #53645c;
+            line-height: 1.7
+        }
+
+        .small {
+            font-size: 8.5pt;
+            color: var(--muted)
+        }
+
+        .rule {
+            height: 1px;
+            background: var(--line);
+            margin: 5mm 0
+        }
+
+        .page-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10mm
+        }
+
+        .page-head .index {
+            font-family: var(--serif);
+            font-size: 29pt;
+            color: #d9dfcf;
+            line-height: 1
+        }
+
+        .wordmark {
+            font-family: var(--sans);
+            font-weight: 700;
+            font-size: 23pt;
+            letter-spacing: 0;
+            color: var(--paper)
+        }
+
+        .wordmark span {
+            color: var(--coral)
+        }
+
+        .chip {
+            display: inline-block;
+            background: var(--soft);
+            padding: 2mm 3mm;
+            font-size: 8pt;
+            color: var(--garnet);
+            font-weight: 700
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 7mm
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4mm
+        }
+
+        .panel {
+            background: var(--white);
+            padding: 6mm;
+            border: 1px solid #eeeee8
+        }
+
+        .dark {
+            background: var(--garnet);
+            color: white
+        }
+
+        .dark p {
+            color: #d7e0d9
+        }
+
+        .accent {
+            color: var(--brick)
+        }
+
+        .swatch {
+            height: 25mm;
+            border-radius: 1mm;
+            margin-bottom: 3mm
+        }
+
+        .swatch-name {
+            font-weight: 700;
+            font-size: 9pt
+        }
+
+        .swatch-code {
+            font-family: monospace;
+            font-size: 8pt;
+            color: var(--muted)
+        }
+
+        .swatch-card {
+            padding: 3mm;
+            background: white;
+            border: 1px solid var(--line)
+        }
+
+        .sample {
+            padding: 6mm;
+            background: white;
+            border: 1px solid var(--line)
+        }
+
+        .number {
+            font: 500 30pt var(--serif);
+            color: var(--brick)
+        }
+
+        .list {
+            padding-left: 5mm;
+            margin: 0
+        }
+
+        .list li {
+            padding: 0 0 2.2mm 1mm
+        }
+
+        .check {
+            color: var(--brick);
+            font-weight: 700
+        }
+
+        .callout {
+            border-left: 3px solid var(--coral);
+            padding: 3mm 4mm;
+            background: #f4f5ee
+        }
+
+        .photo {
+            height: 48mm;
+            width: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .mini-nav {
+            height: 18mm;
+            background: var(--paper);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 6mm;
+            border: 1px solid var(--line)
+        }
+
+        .mini-button {
+            display: inline-block;
+            padding: 3mm 4mm;
+            background: var(--garnet);
+            color: white;
+            font-size: 8pt;
+            font-weight: 700
+        }
+
+        .mini-card {
+            background: white;
+            border: 1px solid var(--line)
+        }
+
+        .mini-card img {
+            width: 100%;
+            height: 34mm;
+            object-fit: cover;
+            display: block
+        }
+
+        .mini-card div {
+            padding: 3mm
+        }
+
+        .mini-card strong {
+            font: 600 13pt var(--serif)
+        }
+
+        .label {
+            font-size: 7pt;
+            letter-spacing: .1em;
+            color: var(--muted);
+            font-weight: 700;
+            text-transform: uppercase
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8.5pt
+        }
+
+        .table td,
+        .table th {
+            text-align: left;
+            padding: 2.5mm;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top
+        }
+
+        .table th {
+            font-size: 7pt;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--brick)
+        }
+
+        .pill {
+            display: inline-block;
+            border-radius: 99px;
+            background: #e7f0f1;
+            color: var(--good);
+            padding: 1mm 3mm;
+            font-size: 7.5pt;
+            font-weight: 700
+        }
+
+        .cover {
+            padding: 0;
+            background: var(--garnet);
+            color: white
+        }
+
+        .cover-photo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 58%;
+            height: 100%;
+            object-fit: cover;
+            opacity: .76
+        }
+
+        .cover-shade {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, #311f22 0%, #311f22ee 43%, #311f2235 100%), linear-gradient(0deg, #311f22bb, transparent 58%)
+        }
+
+        .cover-content {
+            position: absolute;
+            left: 18mm;
+            right: 18mm;
+            top: 23mm;
+            bottom: 19mm;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between
+        }
+
+        .cover-title {
+            font: 600 45pt/1.03 var(--serif);
+            max-width: 125mm;
+            margin: 0
+        }
+
+        .cover-title em {
+            font-weight: 500;
+            color: var(--blush-light)
+        }
+
+        .cover-meta {
+            border-top: 1px solid #ffffff55;
+            padding-top: 5mm;
+            display: flex;
+            justify-content: space-between;
+            color: #d1ddd4;
+            font-size: 8pt;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .cover .kicker {
+            color: #f6d4ce
+        }
+
+        .cover-copy {
+            max-width: 85mm;
+            color: #e3e9e4;
+            font-size: 12pt
+        }
+
+        .page-8 {
+            background: var(--garnet);
+            color: white
+        }
+
+        .page-8 .page-no {
+            border-color: #ffffff44;
+            color: #d1ddd4
+        }
+
+        .page-8 .kicker {
+            color: var(--blush)
+        }
+
+        .page-8 .panel {
+            background: #9e6268;
+            border-color: #b77778
+        }
+
+        .page-8 .small {
+            color: #e6d9d8
+        }
+
+        .page-8 .table td,
+        .page-8 .table th {
+            border-color: #b77778
+        }
+
+        .page-8 .table th {
+            color: var(--blush)
+        }
+
+        .chapter-brief {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5mm;
+            margin: 4mm 0 6mm
+        }
+
+        .chapter-brief>div {
+            min-height: 20mm;
+            padding: 2.5mm 3mm;
+            background: #fff;
+            border-left: 2px solid var(--coral)
+        }
+
+        .chapter-brief h3 {
+            margin: 0 0 1mm;
+            color: var(--brick);
+            font-size: 7pt;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        .chapter-brief p {
+            margin: 0;
+            font-size: 7.5pt;
+            line-height: 1.4
+        }
+
+        .page-8 .chapter-brief>div {
+            background: #9e6268;
+            border-color: var(--blush)
+        }
+
+        .page-8 .chapter-brief p {
+            color: #d7e0d9
+        }
+
+        .page:nth-of-type(3) .grid-3 {
+            gap: 3mm
+        }
+
+        .page:nth-of-type(3) .swatch {
+            height: 22mm;
+            margin-bottom: 2mm
+        }
+
+        .page:nth-of-type(3) .swatch-card,
+        .page:nth-of-type(3) .panel {
+            padding: 3mm
+        }
+
+        .page:nth-of-type(3) .grid-2[style] {
+            margin-top: 5mm !important
+        }
+
+        .page:nth-of-type(3) .table td,
+        .page:nth-of-type(3) .table th {
+            padding: 1.7mm
+        }
+
+        .page:nth-of-type(3) .callout {
+            margin-top: 3mm !important;
+            padding: 2mm 4mm
+        }
+
+        .page:nth-of-type(4) .sample {
+            padding: 3mm
+        }
+
+        .page:nth-of-type(4) .page-head,
+        .page:nth-of-type(8) .page-head {
+            margin-bottom: 6mm
+        }
+
+        .page:nth-of-type(4) .sample>div[style*="32pt"] {
+            font-size: 28pt !important
+        }
+
+        .page:nth-of-type(4) .grid-2 {
+            gap: 5mm
+        }
+
+        .page:nth-of-type(4) .rule {
+            margin: 3.5mm 0
+        }
+
+        .page:nth-of-type(4) .table td,
+        .page:nth-of-type(4) .table th {
+            padding: 1.5mm
+        }
+
+        .page:nth-of-type(4) .grid-2[style] {
+            margin-top: 4mm !important
+        }
+
+        .page:nth-of-type(4) .list li {
+            padding-bottom: 1mm
+        }
+
+        .page:nth-of-type(6) .mini-nav {
+            height: 15mm
+        }
+
+        .page:nth-of-type(6) .grid-2 {
+            gap: 5mm;
+            margin-top: 4mm !important
+        }
+
+        .page:nth-of-type(6) .rule {
+            margin: 3.5mm 0
+        }
+
+        .page:nth-of-type(6) .table td,
+        .page:nth-of-type(6) .table th {
+            padding: 1.4mm
+        }
+
+        .page:nth-of-type(6) .callout {
+            margin-top: 3mm !important;
+            padding: 2mm 4mm
+        }
+
+        .page:nth-of-type(8) .grid-2 {
+            gap: 5mm
+        }
+
+        .page:nth-of-type(8) .panel {
+            padding: 2.5mm
+        }
+
+        .page:nth-of-type(8) .list li {
+            padding-bottom: .6mm
+        }
+
+        .page:nth-of-type(8) .panel .list {
+            font-size: 8.5pt;
+            line-height: 1.4
+        }
+
+        .page:nth-of-type(8) .table td,
+        .page:nth-of-type(8) .table th {
+            padding: .8mm
+        }
+
+        .page:nth-of-type(8) .rule {
+            margin: 2mm 0
+        }
+
+        .page:nth-of-type(8) .page-head h2 {
+            margin-bottom: 3mm
+        }
+
+        .page:nth-of-type(8) .page-head .lead {
+            margin-bottom: 0
+        }
+
+        .page:nth-of-type(8) .panel[style] {
+            padding: 2.5mm
+        }
+
+        @page {
+            size: A4;
+            margin: 0
+        }
+
+        @media print {
+
+            html,
+            body {
+                background: white
+            }
+
+            .page {
+                margin: 0;
+                box-shadow: none
+            }
+
+            .no-print {
+                display: none !important
+            }
+        }
+
+        @media screen {
+            .page {
+                box-shadow: 0 3mm 12mm #0002
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <section class="page cover">
+        <img class="cover-photo"
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=88"
+            alt="Warm, considered apartment interior">
+        <div class="cover-shade"></div>
+        <div class="cover-content">
+            <div>
+                <div class="wordmark">staynest<span>.</span></div>
+                <div style="height:43mm"></div>
+                <div class="kicker"><span class="dot"></span>Frontend identity & experience standards</div>
+                <h1 class="cover-title" style="margin-top:8mm">Make room<br>for <em>somewhere</em><br>wonderful.</h1>
+                <p class="cover-copy" style="margin-top:8mm">A practical brand guide for the digital StayNest
+                    experience: calm discovery, thoughtful spaces, and a stay that feels like yours.</p>
+            </div>
+            <div class="cover-meta"><span>Brand system · Web</span><span>Version 1.0 · November 2026</span><span>01 /
+                    08</span></div>
+        </div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>01 · Brand foundation</div>
+                <h2 style="margin-top:5mm">A softer way<br>to find your place.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Define StayNest's promise, audience, and character.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>A shared identity makes every page feel like one thoughtful host.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Use these traits to guide copy, visual choices, and product decisions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">01</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>What the brand promises</h3>
+                <p>We help guests find a place that fits the shape of their trip, then make the path from browsing to
+                    booking feel clear and reassuring.</p>
+                <div class="callout"><strong>Brand idea</strong><br>Thoughtful stays, made easy to find.</div>
+                <div class="rule"></div>
+                <h3>Who we serve</h3>
+                <p>City visitors, remote workers, families, couples, and longer-stay guests who value welcoming spaces,
+                    honest details, and predictable booking steps.</p>
+            </div>
+            <div class="dark panel">
+                <div class="kicker" style="color:#f6d4ce">Character</div>
+                <h3 style="font:600 19pt var(--serif);margin-top:4mm">Warm, not sugary.<br>Refined, not formal.</h3>
+                <p>Our interface should feel like a good host: attentive, quietly confident, and generous with useful
+                    information.</p>
+                <ul class="list">
+                    <li><strong>Welcoming</strong> — personal language, never overfamiliar</li>
+                    <li><strong>Grounded</strong> — real places and concrete details</li>
+                    <li><strong>Composed</strong> — clear hierarchy, uncluttered controls</li>
+                    <li><strong>Trustworthy</strong> — transparent pricing and status</li>
+                </ul>
+            </div>
+        </div>
+        <div class="rule"></div>
+        <h3>Messaging principles</h3>
+        <div class="grid-3">
+            <div class="panel"><span class="number">01</span>
+                <h3>Lead with the place</h3>
+                <p class="small">Name the stay, location, price, capacity, and what makes it distinctive.</p>
+            </div>
+            <div class="panel"><span class="number">02</span>
+                <h3>Use human words</h3>
+                <p class="small">Prefer “Find your next stay” to generic product or software language.</p>
+            </div>
+            <div class="panel"><span class="number">03</span>
+                <h3>Keep promises precise</h3>
+                <p class="small">Never call a reservation confirmed until payment and booking status are verified.</p>
+            </div>
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Foundation · 02</span></div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>02 · Colour system</div>
+                <h2 style="margin-top:5mm">Garnet, paper,<br>and a note of coral.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Assign a clear role to every brand colour.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>Consistent contrast keeps photography expressive and controls easy to read.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Use tokens by role, then check contrast on real screens.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">02</div>
+        </div>
+        <div class="grid-3">
+            <div class="swatch-card">
+                <div class="swatch" style="background:#302d2c"></div>
+                <div class="swatch-name">Charcoal ink</div>
+                <div class="swatch-code">#302D2C · primary text</div>
+            </div>
+            <div class="swatch-card">
+                <div class="swatch" style="background:#9e6268"></div>
+                <div class="swatch-name">Bright berry</div>
+                <div class="swatch-code">#9E6268 · actions, section fields</div>
+            </div>
+            <div class="swatch-card">
+                <div class="swatch" style="background:#b77778"></div>
+                <div class="swatch-name">Soft berry</div>
+                <div class="swatch-code">#B77778 · hero fallback, secondary depth</div>
+            </div>
+            <div class="swatch-card">
+                <div class="swatch" style="background:#d97967"></div>
+                <div class="swatch-name">Coral accent</div>
+                <div class="swatch-code">#D97967 · punctuation, markers</div>
+            </div>
+            <div class="swatch-card">
+                <div class="swatch" style="background:#f1d8d2"></div>
+                <div class="swatch-name">Soft blush</div>
+                <div class="swatch-code">#F1D8D2 · pale highlight</div>
+            </div>
+            <div class="swatch-card">
+                <div class="swatch" style="background:#f8f7f5;border:1px solid #e8e4e1"></div>
+                <div class="swatch-name">Cool paper</div>
+                <div class="swatch-code">#F8F7F5 · canvas</div>
+            </div>
+        </div>
+        <div class="grid-2" style="margin-top:7mm">
+            <div class="panel">
+                <h3>Supporting neutrals</h3>
+                <table class="table">
+                    <tr>
+                        <th>Role</th>
+                        <th>Value</th>
+                        <th>Use</th>
+                    </tr>
+                    <tr>
+                        <td>Muted text</td>
+                        <td>#76716F</td>
+                        <td>Descriptions, helper text</td>
+                    </tr>
+                    <tr>
+                        <td>Navigation</td>
+                        <td>#5D5857</td>
+                        <td>Secondary links</td>
+                    </tr>
+                    <tr>
+                        <td>Hairline</td>
+                        <td>#E8E4E1</td>
+                        <td>Dividers, borders</td>
+                    </tr>
+                    <tr>
+                        <td>Soft field</td>
+                        <td>#F5ECE9</td>
+                        <td>Subtle badges and quiet areas</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel">
+                <h3>Application rules</h3>
+                <ul class="list">
+                    <li>Use charcoal ink for body text on the cool paper canvas.</li>
+                    <li>Use bright berry for primary actions and broad brand surfaces.</li>
+                    <li>Coral is an accent, not a paragraph-text color.</li>
+                    <li>Use white for card surfaces and reverse text on bright berry.</li>
+                    <li>Use warm red for errors and cool blue for success feedback.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="callout" style="margin-top:6mm"><strong>Contrast note</strong> Coral and blush are accent colours,
+            not small-text colours. Use charcoal or bright berry text on pale blush, and white text on bright berry only
+            after checking contrast for the chosen type size.
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Colour · 03</span></div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>03 · Type & hierarchy</div>
+                <h2 style="margin-top:5mm">Editorial feeling.<br>Everyday clarity.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Separate expressive headlines from functional information.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>A clear type hierarchy supports both emotion and fast comparison.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Reserve Playfair for display; use DM Sans for interface and body copy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">03</div>
+        </div>
+        <div class="grid-2">
+            <div class="sample">
+                <div class="label">Display · Playfair Display, 600</div>
+                <div style="font:600 32pt/1.05 var(--serif);margin:5mm 0">Find your place<br>in the <em
+                        style="color:#b7433b">world.</em></div>
+                <p class="small">Use for the homepage hero, section statements, property titles, and auth image message.
+                    Keep lines short and natural.</p>
+            </div>
+            <div class="sample">
+                <div class="label">Interface · DM Sans, 400–700</div>
+                <div style="font:600 17pt/1.25 var(--sans);margin:5mm 0">Thoughtfully selected<br>apartments for your
+                    stay.</div>
+                <p class="small">Use for body copy, navigation, controls, labels, pricing, metadata, statuses, and admin
+                    tools.</p>
+            </div>
+        </div>
+        <div class="rule"></div>
+        <h3>Recommended web scale</h3>
+        <table class="table">
+            <tr>
+                <th>Style</th>
+                <th>Font</th>
+                <th>Size / leading</th>
+                <th>Application</th>
+            </tr>
+            <tr>
+                <td>Hero headline</td>
+                <td>Playfair Display 600</td>
+                <td>48–76 px / 1.05</td>
+                <td>Homepage lead statement</td>
+            </tr>
+            <tr>
+                <td>Page title</td>
+                <td>Playfair Display 600</td>
+                <td>42 px / 1.12</td>
+                <td>Property and dashboard heading</td>
+            </tr>
+            <tr>
+                <td>Section title</td>
+                <td>Playfair Display 600</td>
+                <td>32–42 px / 1.15</td>
+                <td>Collection and promise sections</td>
+            </tr>
+            <tr>
+                <td>Card title</td>
+                <td>Playfair Display 600</td>
+                <td>18–22 px / 1.25</td>
+                <td>Apartment cards</td>
+            </tr>
+            <tr>
+                <td>Body</td>
+                <td>DM Sans 400</td>
+                <td>14 px / 1.6</td>
+                <td>Descriptions and explanatory copy</td>
+            </tr>
+            <tr>
+                <td>Control</td>
+                <td>DM Sans 600</td>
+                <td>12–14 px / 1.3</td>
+                <td>Buttons, menus, form text</td>
+            </tr>
+            <tr>
+                <td>Eyebrow</td>
+                <td>DM Sans 700</td>
+                <td>10 px / uppercase</td>
+                <td>Section marker; use sparingly</td>
+            </tr>
+        </table>
+        <div class="grid-2" style="margin-top:7mm">
+            <div>
+                <h3>Typesetting principles</h3>
+                <ul class="list">
+                    <li>Use sentence case for headings and actions.</li>
+                    <li>Set uppercase labels in short, tracked phrases only.</li>
+                    <li>Use italics to emphasize a single phrase, not whole paragraphs.</li>
+                    <li>Let the font scale respond to layout, never create cramped line lengths.</li>
+                </ul>
+            </div>
+            <div class="callout"><strong>Fallback stack</strong><br><span style="font-family:var(--serif)">Playfair
+                    Display, Georgia, serif</span><br><span style="font-family:var(--sans)">DM Sans, Arial,
+                    sans-serif</span>
+                <p class="small" style="margin:2mm 0 0">Fonts are loaded from Google Fonts in the current frontend.</p>
+            </div>
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Typography · 04</span></div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>04 · Photography & art direction</div>
+                <h2 style="margin-top:5mm">Show the real<br>reason to stay.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Make the actual apartment the visual centre of discovery.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>Honest imagery helps guests assess fit and builds booking confidence.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Choose clear, useful views and keep crops, quality, and alt text consistent.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">04</div>
+        </div>
+        <img class="photo"
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=86"
+            alt="Warm modern apartment living space">
+        <div class="grid-2" style="margin-top:6mm">
+            <div>
+                <h3>Image direction</h3>
+                <ul class="list">
+                    <li>Lead with a clear, wide view of the actual room or property.</li>
+                    <li>Prefer natural light, honest perspective, lived-in but uncluttered details.</li>
+                    <li>Show distinct spaces: living room, bedroom, kitchen, exterior, view.</li>
+                    <li>Use consistent quality and crop treatment across the listing collection.</li>
+                    <li>Hero photography uses a lighter garnet wash so the room stays visible while white text remains
+                        readable.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Crop and treatment</h3>
+                <ul class="list">
+                    <li>Property cards: landscape crop, consistent frame, focal point remains visible.</li>
+                    <li>Detail page: wide cover image with space to inspect the property.</li>
+                    <li>Authentication: immersive full-height photograph with subtle dark wash.</li>
+                    <li>Avoid heavy blur, artificial gradients over photos, or unrelated stock imagery.</li>
+                    <li>Write useful alt text describing the scene, not repeating “image of”.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="rule"></div>
+        <h3>Where imagery appears</h3>
+        <div class="grid-3">
+            <div class="panel">
+                <div class="label">01 · Discovery</div>
+                <p style="margin:2mm 0 0">Large hero image signals the product. Cards use consistent landscape property
+                    photography.</p>
+            </div>
+            <div class="panel">
+                <div class="label">02 · Evaluation</div>
+                <p style="margin:2mm 0 0">A prominent detail cover supports a considered decision before a guest
+                    reserves.</p>
+            </div>
+            <div class="panel">
+                <div class="label">03 · Account</div>
+                <p style="margin:2mm 0 0">A single immersive image adds warmth to sign-in without competing with the
+                    form.</p>
+            </div>
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Photography · 05</span></div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>05 · Layout & experience patterns</div>
+                <h2 style="margin-top:5mm">A clear journey,<br>from browse to book.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Structure a guest's journey from discovery through reservation.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>Predictable information order lowers effort and supports confident decisions.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Show relevant property facts before asking guests to take action.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">05</div>
+        </div>
+        <div class="mini-nav">
+            <div class="wordmark" style="color:#302d2c;font-size:15pt">staynest<span>.</span></div>
+            <div style="font-size:8pt;color:#5D5857">Explore stays　 My bookings　 Log in</div>
+        </div>
+        <div class="grid-2" style="margin-top:6mm">
+            <div>
+                <h3>Homepage rhythm</h3>
+                <ol class="list">
+                    <li>Sticky, quiet navigation with clear account access.</li>
+                    <li>Immersive photo hero with a short promise and one exploration action.</li>
+                    <li>Search surface overlaps the hero edge and has clearly labelled fields.</li>
+                    <li>Three-column property collection at desktop; single-column on narrow screens.</li>
+                    <li>Promise statement, concise benefits, then one final invitation.</li>
+                </ol>
+            </div>
+            <div>
+                <h3>Property card anatomy</h3>
+                <div class="mini-card"><img
+                        src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82"
+                        alt="Bright apartment interior">
+                    <div>
+                        <div class="label">Victoria Island · Lagos</div><strong>Palm Court Residence</strong>
+                        <p class="small" style="margin:1mm 0 2mm">3 bedrooms · 2 baths · up to 6 guests</p>
+                        <div style="display:flex;justify-content:space-between;font-size:8pt"><b>₦110,000 <span
+                                    class="small">/ night</span></b><span class="accent">View details →</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rule"></div>
+        <h3>Page pattern map</h3>
+        <table class="table">
+            <tr>
+                <th>Page</th>
+                <th>Primary job</th>
+                <th>Visual emphasis</th>
+                <th>Key interaction</th>
+            </tr>
+            <tr>
+                <td>Home</td>
+                <td>Discover and filter stays</td>
+                <td>Photography, editorial hero</td>
+                <td>Search and compare</td>
+            </tr>
+            <tr>
+                <td>Property detail</td>
+                <td>Evaluate a specific apartment</td>
+                <td>Title, location, large image, nightly price</td>
+                <td>Select dates/guests; reserve</td>
+            </tr>
+            <tr>
+                <td>Sign in / register</td>
+                <td>Access an account</td>
+                <td>Split image and focused form</td>
+                <td>One clear submit action</td>
+            </tr>
+            <tr>
+                <td>Guest dashboard</td>
+                <td>Review reservations</td>
+                <td>Compact list rows and status</td>
+                <td>Inspect or cancel booking</td>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>Manage inventory and bookings</td>
+                <td>Dense, scan-friendly operations</td>
+                <td>Create, edit, remove, review</td>
+            </tr>
+        </table>
+        <div class="callout" style="margin-top:6mm"><strong>Spacing system</strong> Use the current generous section
+            rhythm (about 96–100 px vertical padding), 24–36 px page gutters, 22 px card gaps, and 12–20 px control/card
+            padding. Reduce space on mobile without collapsing the hierarchy.</div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Layout · 06</span></div>
+    </section>
+    <section class="page">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>06 · Components, voice & interaction</div>
+                <h2 style="margin-top:5mm">Quiet controls.<br>Confident decisions.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Make recurring controls and feedback feel consistent.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>Familiar patterns reduce errors and make each action easier to understand.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Use clear labels, restrained icons, stable states, and purposeful surfaces.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index">06</div>
+        </div>
+        <div class="grid-2">
+            <div>
+                <h3>Buttons</h3>
+                <div style="display:flex;gap:3mm;align-items:center;margin:3mm 0 4mm"><span class="mini-button">Find
+                        your stay</span><span
+                        style="display:inline-block;border:1px solid #bcc4b9;padding:2.7mm 4mm;font-size:8pt;font-weight:700">Cancel</span>
+                </div>
+                <ul class="list">
+                    <li>Primary: bright berry fill, white text, concise verb-led label.</li>
+                    <li>Secondary: outlined or text treatment; use for reversible, lower-priority actions.</li>
+                    <li>Keep buttons stable in size and label; show busy state without shifting layout.</li>
+                    <li>Do not append decorative arrows to every button.</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Forms and feedback</h3>
+                <ul class="list">
+                    <li>Labels remain visible above fields; never rely on placeholder alone.</li>
+                    <li>Use native date, numeric, and select controls when they fit the task.</li>
+                    <li>Put validation near the field or action that needs attention.</li>
+                    <li>Errors use restrained warm red; success uses cool blue with explicit text.</li>
+                    <li>Show pending, confirmed, cancelled, and failed states in words.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="rule"></div>
+        <div class="grid-2">
+            <div>
+                <h3>Iconography</h3>
+                <p>Use a consistent outline family (Lucide is already in the frontend). Keep icons small, aligned, and
+                    subordinate to labels. Reserve icon-only buttons for familiar actions and provide accessible
+                    names/tooltips. Remove decorative duplication from wordmarks, field rows, and amenity lists.</p>
+                <h3>Surface and shape</h3>
+                <p>Cards are functional containers, not decoration. Use white surfaces, fine warm-grey borders,
+                    restrained shadows, and small corner radii. Avoid nested cards and excessive pill styling.</p>
+            </div>
+            <div>
+                <h3>Voice examples</h3>
+                <table class="table">
+                    <tr>
+                        <th>Prefer</th>
+                        <th>Avoid</th>
+                    </tr>
+                    <tr>
+                        <td>“Find your place in the world.”</td>
+                        <td>“The ultimate accommodation solution”</td>
+                    </tr>
+                    <tr>
+                        <td>“₦85,000 per night”</td>
+                        <td>Unexplained totals or hidden fees</td>
+                    </tr>
+                    <tr>
+                        <td>“Your reservation is confirmed.”</td>
+                        <td>Claiming success before verification</td>
+                    </tr>
+                    <tr>
+                        <td>“No apartments match those filters.”</td>
+                        <td>“Oops! Nothing here!”</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="panel" style="margin-top:5mm">
+            <h3>Motion</h3>
+            <p class="small" style="margin-bottom:0">Motion should clarify rather than entertain: a subtle image hover,
+                a restrained menu reveal, or a loading state. Respect `prefers-reduced-motion`; never make essential
+                information depend on animation.</p>
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE</span><span>Components & voice · 07</span></div>
+    </section>
+    <section class="page page-8">
+        <div class="page-head">
+            <div>
+                <div class="kicker"><span class="dot"></span>07 · Accessibility & implementation</div>
+                <h2 style="margin-top:5mm">Make the calm<br>work for everyone.</h2>
+                <div class="chapter-brief">
+                    <div>
+                        <h3>Purpose</h3>
+                        <p>Set a baseline for accessible, responsive product experiences.</p>
+                    </div>
+                    <div>
+                        <h3>Why it matters</h3>
+                        <p>Inclusive patterns work across devices, abilities, and real usage conditions.</p>
+                    </div>
+                    <div>
+                        <h3>How to apply it</h3>
+                        <p>Use the checklist during design, implementation, and release review.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="index" style="color:#b77778">07</div>
+        </div>
+        <div class="grid-2">
+            <div class="panel">
+                <h3>Accessibility checklist</h3>
+                <ul class="list">
+                    <li>Maintain readable contrast for body and control text.</li>
+                    <li>Use semantic headings, buttons, links, forms, and landmarks.</li>
+                    <li>Give every input a programmatic label and every image useful alt text.</li>
+                    <li>Make focus visible and keep all interactions keyboard-operable.</li>
+                    <li>Do not communicate booking state through colour alone.</li>
+                    <li>Respect reduced motion and zoom/reflow at 200%.</li>
+                    <li>Keep tap targets comfortable on touch screens.</li>
+                </ul>
+            </div>
+            <div class="panel">
+                <h3>Responsive behaviour</h3>
+                <ul class="list">
+                    <li>Desktop: three property columns, horizontal search row, split auth.</li>
+                    <li>Tablet: simplify navigation and reduce columns before content gets cramped.</li>
+                    <li>Mobile: one-column listings, stacked search controls, clear form spacing.</li>
+                    <li>Keep the property title, price, and primary reservation action easy to find.</li>
+                    <li>Prevent long city names, prices, and buttons from overflowing.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="rule" style="background:#b77778"></div>
+        <h3>Design tokens for product work</h3>
+        <table class="table">
+            <tr>
+                <th>Token</th>
+                <th>Value</th>
+                <th>Where to apply</th>
+            </tr>
+            <tr>
+                <td>Color / ink</td>
+                <td>#302D2C</td>
+                <td>Body copy and high-contrast type</td>
+            </tr>
+            <tr>
+                <td>Color / action</td>
+                <td>#9E6268</td>
+                <td>Primary buttons and dark bands</td>
+            </tr>
+            <tr>
+                <td>Color / paper</td>
+                <td>#F8F7F5</td>
+                <td>App canvas and navigation</td>
+            </tr>
+            <tr>
+                <td>Color / coral</td>
+                <td>#D97967</td>
+                <td>Accent dot, selected highlights</td>
+            </tr>
+            <tr>
+                <td>Font / display</td>
+                <td>Playfair Display</td>
+                <td>Editorial headings and property names</td>
+            </tr>
+            <tr>
+                <td>Font / interface</td>
+                <td>DM Sans</td>
+                <td>Everything interactive and informational</td>
+            </tr>
+            <tr>
+                <td>Content width</td>
+                <td>1168–1240 px</td>
+                <td>Centered page shell</td>
+            </tr>
+            <tr>
+                <td>Card image</td>
+                <td>245 px desktop</td>
+                <td>Consistent listing crop</td>
+            </tr>
+        </table>
+        <div class="rule" style="background:#b77778"></div>
+        <h3>Current implementation notes</h3>
+        <div class="panel">
+            <ul class="list">
+                <li><strong>Wordmark drift:</strong> the current React header/footer render only a dot; restore the
+                    lowercase “staynest” wordmark with the coral period for a complete identity.</li>
+                <li><strong>Image consistency:</strong> retain the existing property photography approach and ensure
+                    every listing has a meaningful image and alt label.</li>
+                <li><strong>Payment messaging:</strong> product copy must match the implemented payment and confirmation
+                    flow; remove demo-only claims when checkout is active.</li>
+            </ul>
+        </div>
+        <div class="page-no"><span>STAYNEST · DIGITAL BRAND GUIDE · INTERNAL REFERENCE</span><span>Accessibility &
+                system · 08</span></div>
+    </section>
+</body>
+
+</html>
