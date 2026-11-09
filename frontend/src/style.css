@@ -1884,6 +1884,14 @@ small,
 }
 
 @media (max-width: 800px) {
+  .cookie-consent {
+    position: static;
+    width: auto;
+    margin: 16px 20px;
+  }
+}
+
+@media (max-width: 800px) {
   .contact-inner {
     grid-template-columns: minmax(0, 1fr);
   }
