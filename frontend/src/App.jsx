@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { supabase } from "./lib/supabase";
 import { Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import {
   Search,
@@ -255,6 +256,7 @@ function ContactSection() {
   });
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState({ type: "", text: "" });
+
 
   async function submit(e) {
     e.preventDefault();
@@ -708,6 +710,23 @@ function Auth({ mode, setUser }) {
     [password, setPassword] = useState(""),
     [err, setErr] = useState(""),
     [busy, setBusy] = useState(false);
+  async function googleSignIn() {
+    setBusy(true);
+    setErr("");
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      if (error) throw error;
+    } catch {
+      setErr("Google sign-in could not be started. Please try again.");
+      setBusy(false);
+    }
+  }
+
   async function submit(e) {
     e.preventDefault();
     setBusy(true);
@@ -789,6 +808,16 @@ function Auth({ mode, setUser }) {
           />
         </label>
         {err && <div className="notice error">{err}</div>}
+        <button
+          type="button"
+          className="google-btn"
+          onClick={googleSignIn}
+          disabled={busy}
+        >
+          <span className="google-mark">G</span>
+          Continue with Google
+        </button>
+        <div className="auth-divider"><span>OR</span></div>
         <button className="primary-btn" disabled={busy}>
           {busy
             ? "Please wait…"
@@ -811,6 +840,68 @@ function Auth({ mode, setUser }) {
     </main>
   );
 }
+function GoogleAuthCallback({ setUser }) {
+  const nav = useNavigate();
+  const [message, setMessage] = useState("Completing Google sign-in...");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    async function completeSignIn() {
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (error) throw error;
+
+        const accessToken = data.session?.access_token;
+        if (!accessToken) {
+          throw new Error("No Google session was found.");
+        }
+
+        const result = await request("/auth/google", {
+          method: "POST",
+          body: JSON.stringify({ accessToken }),
+        });
+
+        if (!result.token || !result.user) {
+          throw new Error("Account authentication failed.");
+        }
+
+        if (cancelled) return;
+
+        localStorage.setItem("staynest_token", result.token);
+        setUser(result.user);
+        await supabase.auth.signOut({ scope: "local" }).catch(() => {});
+        nav(result.user.role === "admin" ? "/admin" : "/dashboard", {
+          replace: true,
+        });
+      } catch {
+        await supabase.auth.signOut({ scope: "local" }).catch(() => {});
+        if (!cancelled) {
+          setMessage("Google sign-in failed. Please return to login and try again.");
+        }
+      }
+    }
+
+    completeSignIn();
+    return () => {
+      cancelled = true;
+    };
+  }, [nav, setUser]);
+
+  return (
+    <main className="auth-page">
+      <div className="auth-form">
+        <Link to="/" className="brand"><span>staynest</span></Link>
+        <h1>Google sign-in</h1>
+        <p>{message}</p>
+        {message.startsWith("Google sign-in failed") && (
+          <Link className="primary-btn" to="/login">Return to login</Link>
+        )}
+      </div>
+    </main>
+  );
+}
+
 function Details({ user }) {
   const { id } = useParams(),
     [a, setA] = useState(null),
@@ -1627,6 +1718,10 @@ export default function App() {
         <Route
           path="/register"
           element={<Auth mode="register" setUser={setUser} />}
+        />
+        <Route
+          path="/auth/callback"
+          element={<GoogleAuthCallback setUser={setUser} />}
         />
         <Route path="/apartments/:id" element={<Details user={user} />} />
         <Route path="/booking-result" element={<BookingResult />} />

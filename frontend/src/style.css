@@ -1821,3 +1821,83 @@ small,
     border-color: #bbb;
   }
 }
+
+.google-btn {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 12px 16px;
+  border: 1px solid #e5dfdc;
+  border-radius: 3px;
+  background: #fff;
+  color: #302d2c;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.google-btn:hover {
+  background: #faf8f7;
+  border-color: #c9b9b4;
+}
+
+.google-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.google-mark {
+  font-size: 19px;
+  font-weight: 700;
+  color: #4285f4;
+}
+
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0;
+  color: #8a8280;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #e5dfdc;
+}
+
+.auth-callback {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .contact-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .contact-form,
+  .contact-fields {
+    min-width: 0;
+  }
+  .contact-fields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

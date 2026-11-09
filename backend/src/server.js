@@ -5,9 +5,10 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { randomUUID } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import { z } from "zod";
 import { db } from "./db.js";
+import { createClient } from "@supabase/supabase-js";
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -16,7 +17,20 @@ if (!SECRET && process.env.NODE_ENV === "production")
   throw new Error("JWT_SECRET is required in production");
 const jwtSecret = SECRET || "local-development-secret-change-me";
 app.use(helmet());
-app.use(cors({ origin: process.env.CLIENT_URL || "http://localhost:5173" }));
+const allowedOrigins = new Set([
+  "http://localhost:5173",
+  "https://booking-apartment-o3rt.vercel.app",
+  process.env.CLIENT_URL,
+].filter(Boolean));
+
+app.use(cors({
+  origin(origin, callback) {
+    if (!origin || allowedOrigins.has(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error("Origin not allowed by CORS"));
+  },
+}));
 app.use(express.json({ limit: "20kb" }));
 app.use(
   "/api/auth",
@@ -248,6 +262,77 @@ app.post(
     res.status(201).json({ message: "Your enquiry has been sent." });
   }),
 );
+app.post(
+  "/api/auth/google",
+  wrap(async (req, res) => {
+    const accessToken = req.body?.accessToken;
+
+    if (typeof accessToken !== "string" || !accessToken.trim()) {
+      return res.status(400).json({
+        message: "Google sign-in could not be completed. Please try again.",
+      });
+    }
+
+    const url = process.env.SUPABASE_URL;
+    const key = process.env.SUPABASE_PUBLISHABLE_KEY;
+
+    if (!url || !key) {
+      return res.status(503).json({
+        message: "Google sign-in is temporarily unavailable.",
+      });
+    }
+
+    const supabase = createClient(url, key, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    });
+
+    const { data, error } = await supabase.auth.getUser(accessToken);
+    const googleUser = data?.user;
+
+    const isGoogle =
+      googleUser?.app_metadata?.provider === "google" ||
+      googleUser?.identities?.some((identity) => identity.provider === "google");
+
+    if (error || !isGoogle || !googleUser?.email || !googleUser.email_confirmed_at) {
+      return res.status(401).json({
+        message: "Google account verification failed. Please try again.",
+      });
+    }
+
+    const email = googleUser.email.trim().toLowerCase();
+    const name = String(
+      googleUser.user_metadata?.full_name ||
+      googleUser.user_metadata?.name ||
+      email.split("@")[0]
+    ).trim().slice(0, 80);
+
+    const passwordHash = await bcrypt.hash(
+      randomBytes(48).toString("hex"),
+      12
+    );
+
+    const result = await db.query(
+      `INSERT INTO users (name, email, password)
+       VALUES ($1, $2, $3)
+       ON CONFLICT (email)
+       DO UPDATE SET email = users.email
+       RETURNING id, name, email, role`,
+      [name || email.split("@")[0], email, passwordHash]
+    );
+
+    const user = result.rows[0];
+
+    res.json({
+      token: issue(user),
+      user: safeUser(user),
+    });
+  }),
+);
+
 app.post(
   "/api/auth/register",
   wrap(async (req, res) => {
