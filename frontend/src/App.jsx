@@ -257,7 +257,6 @@ function ContactSection() {
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState({ type: "", text: "" });
 
-
   async function submit(e) {
     e.preventDefault();
     setBusy(true);
@@ -711,6 +710,12 @@ function Auth({ mode, setUser }) {
     [err, setErr] = useState(""),
     [busy, setBusy] = useState(false);
   async function googleSignIn() {
+    if (!supabase) {
+      setErr(
+        "Google sign-in is unavailable. Configure VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY for this deployment.",
+      );
+      return;
+    }
     setBusy(true);
     setErr("");
     try {
@@ -817,7 +822,9 @@ function Auth({ mode, setUser }) {
           <span className="google-mark">G</span>
           Continue with Google
         </button>
-        <div className="auth-divider"><span>OR</span></div>
+        <div className="auth-divider">
+          <span>OR</span>
+        </div>
         <button className="primary-btn" disabled={busy}>
           {busy
             ? "Please wait…"
@@ -845,6 +852,13 @@ function GoogleAuthCallback({ setUser }) {
   const [message, setMessage] = useState("Completing Google sign-in...");
 
   useEffect(() => {
+    if (!supabase) {
+      setMessage(
+        "Google sign-in failed: Supabase is not configured for this deployment. Please return to login.",
+      );
+      return;
+    }
+
     let cancelled = false;
 
     async function completeSignIn() {
@@ -877,7 +891,9 @@ function GoogleAuthCallback({ setUser }) {
       } catch {
         await supabase.auth.signOut({ scope: "local" }).catch(() => {});
         if (!cancelled) {
-          setMessage("Google sign-in failed. Please return to login and try again.");
+          setMessage(
+            "Google sign-in failed. Please return to login and try again.",
+          );
         }
       }
     }
@@ -891,11 +907,15 @@ function GoogleAuthCallback({ setUser }) {
   return (
     <main className="auth-page">
       <div className="auth-form">
-        <Link to="/" className="brand"><span>staynest</span></Link>
+        <Link to="/" className="brand">
+          <span>staynest</span>
+        </Link>
         <h1>Google sign-in</h1>
         <p>{message}</p>
         {message.startsWith("Google sign-in failed") && (
-          <Link className="primary-btn" to="/login">Return to login</Link>
+          <Link className="primary-btn" to="/login">
+            Return to login
+          </Link>
         )}
       </div>
     </main>
